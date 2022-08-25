@@ -226,22 +226,22 @@ jobs:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       # Here's where you will add some code to rollback on failure      
 
-  run-migrations:
-    docker:
-      # Docker image here that supports NodeJS
-    steps:
-      # Checkout code from git
-      - checkout
-      - run:
-          name: Run migrations
-          command: |
-            # Your code here
-            exit 1
-      - run:
-          name: Send migration results to memstash
-          command: |
-            # Your code here
-            exit 1
+  # run-migrations:
+  #   docker:
+  #     # Docker image here that supports NodeJS
+  #   steps:
+  #     # Checkout code from git
+  #     - checkout
+  #     - run:
+  #         name: Run migrations
+  #         command: |
+  #           # Your code here
+  #           exit 1
+  #     - run:
+  #         name: Send migration results to memstash
+  #         command: |
+  #           # Your code here
+  #           exit 1
      # Here's where you will add some code to rollback on failure      
 
 #   deploy-frontend:
