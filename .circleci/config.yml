@@ -201,21 +201,22 @@ jobs:
   configure-infrastructure:
     docker:
       # Docker image here that supports Ansible
-       - image: python:3.9.0-alpine
+       - image: python3.7-alpine3.16
     steps:
       # Checkout code from git
       - checkout
       # Add ssh keys with fingerprint
       - add_ssh_keys:
-          fingerprints: ["57:08:c3:31:df:6f:04:74:18:95:59:52:47:3a:ea:cd"]
-      # attach workspace
-      - attach_workspace:
-          at: ~/
+          fingerprints:
+            - '57:08:c3:31:df:6f:04:74:18:95:59:52:47:3a:ea:cd'
       - run:
           name: Install dependencies
           command: |
             # Your code here
             apk add --update --no-cache tar gzip ansible aws-cli
+      # attach workspace
+      - attach_workspace:
+          at: ~/
       - run:
           name: Configure server
           command: |
@@ -237,6 +238,8 @@ jobs:
           name: Install dependencies
           command:
             apk add --update --no-cache tar gzip nodejs npm aws-cli curl
+      - restore_cache:
+           keys: [backend-build]
       - run:
           name: Run migrations
           command: |
@@ -253,7 +256,9 @@ jobs:
             then
               curl https://kvdb.io/VtTh2rPKdFdVeS73R2kWYK/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-     # Here's where you will add some code to rollback on failure      
+     # Here's where you will add some code to rollback on failure 
+      - destroy-environment:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}     
 
 #   deploy-frontend:
 #     docker:
@@ -354,9 +359,9 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend
-      # - build-backend:
-      #       context: Slack_Token
+      - build-frontend
+      - build-backend:
+            context: Slack_Token
       # - test-frontend:
       #     requires: [build-frontend]
       # - test-backend:
