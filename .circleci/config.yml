@@ -245,8 +245,8 @@ jobs:
           working_directory: /tmp
           command:
             sudo apt-get update && apt-get install -yy tar gzip curl
-            curl -s "https://awscli.amazonaws.com/awscli-exe-linux-aarch64$1.zip" -o "awscliv2.zip"
-            unzip -qq -o awscliv2.zip
+            curl -s "https://awscli.amazonaws.com/awscli-exe-linux-aarch64$1.zip" -o "awscliv2.zip=2.2.0"
+            unzip -qq -o awscliv2.zip=2.2.0
             sudo ./aws/install
       - restore_cache:
            keys: [backend-build]
@@ -426,9 +426,9 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend
-      - build-backend:
-            context: Slack_Token
+      # - build-frontend
+      # - build-backend:
+      #       context: Slack_Token
       # - test-frontend:
       #     requires: [build-frontend]
       # - test-backend:
