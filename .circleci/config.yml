@@ -244,7 +244,7 @@ jobs:
           name: Install dependencies
           command:
             sudo apt-get update && apt-get install -yy tar gzip curl
-            curl -sL "https://awscli.amazonaws.com/awscli-exe-linux-aarch64$1.zip" -o "awscliv2.zip"
+            curl -s "https://awscli.amazonaws.com/awscli-exe-linux-aarch64$1.zip" -o "awscliv2.zip"
             unzip -q -o awscliv2.zip
             sudo ./aws/install
       - restore_cache:
