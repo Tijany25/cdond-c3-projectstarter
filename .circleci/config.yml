@@ -237,7 +237,7 @@ jobs:
       - run:
           name: Install dependencies
           command:
-            sudo apt-get update && sudo apt-get install --no-cache tar gzip nodejs npm aws-cli curl
+            sudo apt-get update && sudo apt-get install tar gzip nodejs npm aws-cli curl
       - restore_cache:
            keys: [backend-build]
       - run:
