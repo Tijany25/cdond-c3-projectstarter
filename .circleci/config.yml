@@ -230,14 +230,14 @@ jobs:
   run-migrations:
     docker:
       # Docker image here that supports NodeJS
-      - image: circleci/node:13.8.0
+      - image: python:3.7-alpine3.16
     steps:
       # Checkout code from git
       - checkout
       - run:
           name: Install dependencies
           command:
-            sudo apt-get update && sudo apt-get install tar gzip nodejs npm aws-cli curl
+            apk add --update --no-cache tar gzip nodejs npm aws-cli curl
       - restore_cache:
            keys: [backend-build]
       - run:
