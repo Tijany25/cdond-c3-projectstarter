@@ -24,6 +24,10 @@
         state: latest
         update_cache: yes
 
+  roles:
+    # Your code here
+    - configure-server
+
   # Get the environment variables from CircleCI and add to the EC2 instance
   environment:
     - TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION')}}"
@@ -37,7 +41,3 @@
     - TYPEORM_MIGRATIONS_DIR: "{{ lookup('env', 'TYPEORM_MIGRATIONS_DIR')}}"
 
     # Add more env vars here
-
-  roles:
-    # Your code here
-    - configure-server

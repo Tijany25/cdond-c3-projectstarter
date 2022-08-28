@@ -216,12 +216,12 @@ jobs:
           command: |
             # Your code here
             apk add --update --no-cache tar gzip ansible aws-cli
-      # - run:
-      #     name: Configure server
-      #     command: |
-      #       # Your code here
-      #       cd .circleci/ansible
-      #       ansible-playbook -i inventory.txt configure-server.yml
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            cd .circleci/ansible
+            ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       # Here's where you will add some code to rollback on failure      
