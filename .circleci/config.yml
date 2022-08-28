@@ -245,7 +245,7 @@ jobs:
           command:
             sudo apt-get update && apt-get install -yy tar gzip curl
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"="2.2.0"
-            unzip -q -o awscliv2.zip
+            unzip -q -o awscliv2.zip=2.2.0
             sudo ./aws/install -i
       - restore_cache:
            keys: [backend-build]
