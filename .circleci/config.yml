@@ -255,9 +255,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            sudo npm install -g npm
-            npm audit fix --force
-            npm audit fix audit-level=critical
+            sudo npm install
             npm run migrations | tee migrations.txt
       - run:
           name: Send migration results to kvbd
