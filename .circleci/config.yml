@@ -253,7 +253,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm run migrations >> migrations.txt
+            sudo npm run migrations >> migrations.txt
       - run:
           name: Send migration results to kvbd
           command: |
