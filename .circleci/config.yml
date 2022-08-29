@@ -254,10 +254,7 @@ jobs:
       - run:
           name: Run migrations
           command: |
-            # Your code here
             cd backend
-            npm install
-            npm fix --audit-level=critical --force
             npm run migrations >> migrations.txt
       - run:
           name: Send migration results to kvbd
@@ -427,8 +424,8 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend
-      # - build-backend:
+      - build-frontend
+      - build-backend
       #       context: Slack_Token
       # - test-frontend:
       #     requires: [build-frontend]
