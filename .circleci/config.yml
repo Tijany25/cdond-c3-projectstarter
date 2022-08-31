@@ -39,18 +39,21 @@ commands:
           when: on_fail
           command: |
             # # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            # SUCCESS = 1
-            # if(( $SUCCESS==1 )); 
-            # then
-            # #  cd ~/project/backend
-            # #  npm install
-            # #  Add revert code here. You can find this in the Getting Started section.
-            #   exit 1
-            # fi
-            cd ~/project/backend
-            npm install
-            npm run build
-            npm run migrations:revert
+            SUCCESS=$(curl --insecure  https://kvdb.io/F23UxDpLsJMUeRDeGB4HDx/migration_<< parameters.workflow_id >>)
+            SUCCESS = 1
+            if(( $SUCCESS==1 )); 
+            then
+             cd ~/project/backend
+             npm install
+             npm run build
+             npm run migrations:revert
+             # Add revert code here. You can find this in the Getting Started section.
+              exit 1
+            fi
+            # cd ~/project/backend
+            # npm install
+            # npm run build
+            # npm run migrations:revert
             
 jobs:
   build-frontend:
@@ -285,7 +288,7 @@ jobs:
             # Your code here
             if grep -q "has been executed successfully." ~/project/backend/migrations.txt
             then
-              curl https://https://kvdb.io/F23UxDpLsJMUeRDeGB4HDx/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+              curl https://kvdb.io/F23UxDpLsJMUeRDeGB4HDx/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
      # Here's where you will add some code to rollback on failure 
       - destroy-environment:
